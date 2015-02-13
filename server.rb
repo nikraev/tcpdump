@@ -1,8 +1,25 @@
 require 'socket'
  load './redis.rb'
 
+class Server
+  def initialize()
+    server = TCPServer.new('localhost', 3000)
+  end
 
-server = TCPServer.new('localhost', 3000)
+  def initialize( host, port)
+    server = TCPServer.new(host , port)
+  end
+
+  def getClientMessage(message)
+
+  end
+
+  def resiveMessage
+
+  end
+end
+
+
 
 loop do
   Thread.start(server.accept) do |client|
@@ -10,8 +27,7 @@ loop do
     
     session = Session.new('127.0.0.1', 6379)
     message = client.gets.chomp.split(';')
-    message.size
-
+  
     command = message[0]
     arg = message[1]
 
